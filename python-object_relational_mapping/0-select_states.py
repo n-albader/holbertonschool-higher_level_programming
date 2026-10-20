@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-"""Lists all states from a MySQL database."""
+"""Lists all states from a MySQL database"""
 
 import MySQLdb
 import sys
 
 
 def main():
-    """Lists all states in ascending order by ID."""
+    """Lists all states in ascending order by ID"""
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
