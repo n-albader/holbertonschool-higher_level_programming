@@ -5,7 +5,7 @@ import MySQLdb
 import sys
 
 
-def main():
+if __name__ == "__main__":
     """Displays states matching the given name in ascending ID order"""
     db = MySQLdb.connect(
         host="localhost",
@@ -16,9 +16,10 @@ def main():
     )
 
     cursor = db.cursor()
-    cursor.execute(
-            "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(sys.argv[4])
+    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(
+            sys.argv[4]
     )
+    cursor.execute(query)
 
     for state in cursor.fetchall():
         print(state)
@@ -26,6 +27,3 @@ def main():
     cursor.close()
     db.close()
 
-
-if __name__ == "__main__":
-    main()
