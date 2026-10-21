@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-"""Lists states whose names start with N."""
+"""Lists states whose names start with N"""
 
 import MySQLdb
 import sys
 
 
 def main():
-    """Displays states starting with uppercase N."""
+    """Displays states starting with uppercase N"""
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
