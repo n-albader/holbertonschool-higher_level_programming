@@ -14,13 +14,15 @@ def main():
         passwd=sys.argv[2],
         db=sys.argv[3]
     )
+
     cursor = db.cursor()
-    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(
-        sys.argv[4]
+    cursor.execute(
+            "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(sys.argv[4])
     )
-    cursor.execute(query)
+
     for state in cursor.fetchall():
         print(state)
+
     cursor.close()
     db.close()
 
