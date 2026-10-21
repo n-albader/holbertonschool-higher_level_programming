@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-"""Lists states matching a name provided by the user"""
+"""
+This script takes in an argument and displays all values in the states
+table of a given database where the name matches the argument.
+"""
 
 import MySQLdb
 import sys
 
-
 if __name__ == "__main__":
-    """Displays states matching the given name in ascending ID order"""
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -14,16 +15,13 @@ if __name__ == "__main__":
         passwd=sys.argv[2],
         db=sys.argv[3]
     )
-
     cursor = db.cursor()
     query = "SELECT * FROM states WHERE name = '{}' ORDER BY states.id ASC".format(
-            sys.argv[4]
+        sys.argv[4]
     )
     cursor.execute(query)
-
     rows = cursor.fetchall()
     for row in rows:
         print(row)
-
     cursor.close()
     db.close()
