@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-filters states based on user input using string formatting.
-"""
+"""filters states based on user input using string formatting"""
 
 import MySQLdb
 import sys
@@ -15,16 +13,17 @@ if __name__ == "__main__":
         passwd=sys.argv[2],
         db=sys.argv[3]
     )
-    cursor = db.cursor()
-    cursor.execute(
-        "SELECT * FROM states WHERE name = '{}' ORDER BY states.id ASC"
-        .format(sys.argv[4])
-    )
 
-    rows = cursor.fetchall()
+    cur = db.cursor()
+    query = """SELECT * FROM states
+               WHERE name LIKE BINARY '{}'
+               ORDER BY states.id ASC""".format(sys.argv[4])
+
+    cur.execute(query)
+    rows = cur.fetchall()
 
     for row in rows:
         print(row)
 
-    cursor.close()
+    cur.close()
     db.close()
