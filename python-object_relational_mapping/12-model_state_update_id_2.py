@@ -15,12 +15,16 @@ if __name__ == "__main__":
         pool_pre_ping=True
     )
 
+    Base.metadata.create_all(engine)
+
     session = Session(engine)
 
-    state_up = session.query(State).filter_by(id=2).first()
+    state = session.query(State).filter_by(id=2).first()
 
-    if state_up:
-        state_up.name = "New Mexico"
+    if state:
+        state.name = "New Mexico"
         session.commit()
+    else:
+        print("State with id=2 not found")
 
     session.close()
