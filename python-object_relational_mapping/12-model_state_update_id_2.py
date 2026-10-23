@@ -22,5 +22,7 @@ if __name__ == "__main__":
     if state:
         state.name = "New Mexico"
         session.commit()
+    else:
+        print("State with id=2 not found")
 
     session.close()
