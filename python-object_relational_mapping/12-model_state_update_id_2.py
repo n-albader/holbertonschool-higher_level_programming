@@ -2,8 +2,8 @@
 """Changes the name of a State object."""
 
 import sys
-from sqlalchemy import (create_engine)
-from sqlalchemy.orm import Session
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
 
@@ -16,12 +16,14 @@ if __name__ == "__main__":
         ),
         pool_pre_ping=True
     )
-    Base.metadata.create_all(engine)
 
-    session = Session(engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-    state_update = session.query(State).where(State.id.ilike(2))
-    state = state_update.one()
+    state = session.query(State).filter(State.id ==2).first()
+    
     if state:
-        state.name = 'New Mexico'
+        state.name = "New Mexico"
         session.commit()
+
+    session.close()
