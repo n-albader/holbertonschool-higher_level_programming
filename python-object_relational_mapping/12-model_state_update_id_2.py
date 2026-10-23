@@ -3,7 +3,7 @@
 
 import sys
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
 
@@ -17,14 +17,10 @@ if __name__ == "__main__":
 
     Base.metadata.create_all(engine)
 
-    session = Session(engine)
+    session = sessionmaker(bind=engine)
+    session = Session()
 
     state = session.query(State).filter_by(id=2).first()
 
-    if state:
-        state.name = "New Mexico"
-        session.commit()
-    else:
-        print("State with id=2 not found")
-
-    session.close()
+    state.name = 'New Mexico'
+    session.commit()
