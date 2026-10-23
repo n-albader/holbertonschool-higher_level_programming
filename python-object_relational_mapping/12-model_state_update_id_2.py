@@ -3,7 +3,7 @@
 
 import sys
 from sqlalchemy import create_engine
-from sqlalchemy.orm import session
+from sqlalchemy.orm import Session
 from model_state import Base, State
 
 
@@ -17,10 +17,10 @@ if __name__ == "__main__":
 
     session = Session(engine)
 
-    state = session.query(State).filter_by(id=2).first()
+    state_up = session.query(State).filter_by(id=2).first()
 
-    if state:
-        state.name = "New Mexico"
+    if state_up:
+        state_up.name = "New Mexico"
         session.commit()
 
     session.close()
