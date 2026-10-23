@@ -3,7 +3,7 @@
 
 import sys
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import session
 from model_state import Base, State
 
 
@@ -15,11 +15,11 @@ if __name__ == "__main__":
         pool_pre_ping=True
     )
 
-    Session = sessionmaker(bind=engine)
-    session = Session()
+    session = Session(engine)
 
-    state = session.query(State).filter(State.id == 2).first()
-    if state is not None:
+    state = session.query(State).filter_by(id=2).first()
+
+    if state:
         state.name = "New Mexico"
         session.commit()
 
